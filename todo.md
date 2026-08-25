@@ -24,4 +24,4 @@
 - [x] Make demo analysis fail-safe by resolving an unverified browser repository value to a verified disposable repository before any Git inspection.
 - [x] Add a regression test for the exact fallback path and re-verify the browser mutation on `/?from_webdev=1`.
 - [x] Return and test an explicit analysis execution mode so the demo bypass is observable in the Python-core result.
-- [ ] Export the verified MergePilot project to the user's GitHub account in a private deployment-ready repository.
+- [x] Export the verified MergePilot project to the user's GitHub account in a private deployment-ready repository.
