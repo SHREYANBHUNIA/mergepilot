@@ -1,0 +1,20 @@
+# Project TODO
+
+- [x] Define the runtime boundary between the React workspace, API layer, Python analysis core, database, and isolated validation worker.
+- [x] Implement the `git-engine` module to inspect repository metadata, branches, merge-base state, and conflict-marked files with GitPython.
+- [x] Implement the `ast-engine` module using Tree-sitter to map conflicting regions to language, AST nodes, symbols, and complexity signals.
+- [x] Implement the `conflict-detector` module to classify conflicts as syntactic, semantic, or mixed and report risk factors.
+- [x] Implement the `resolution-engine` module with deterministic left/right/base/manual merge candidates and optional LLM-assisted candidates.
+- [x] Implement the `ranking` module to score candidates using syntax validity, symbol impact, AST signals, validation status, and policy checks.
+- [x] Implement the `validation` module to run allow-listed test commands in disposable candidate workspaces and reject failing candidates.
+- [x] Implement API endpoints for starting analyses, retrieving conflicts and candidates, validating candidates, selecting a resolution, and exporting apply-ready patches.
+- [x] Persist analyses, conflicts, candidates, score factors, validation outcomes, selected resolutions, patches, and timestamps for an auditable history.
+- [x] Build a React dashboard with repository/branch inputs, analysis status, conflict workspace, candidate comparison, validation evidence, and resolution history.
+- [x] Apply the deep royal blue architectural-blueprint visual system with technical grid, CAD-style frames, linework, and accessible white typography.
+- [x] Add automated tests covering conflict detection, AST classification, deterministic candidates, ranking behavior, validation rejection, and API orchestration.
+- [x] Verify type safety, tests, UI behavior, responsive layout, and the end-to-end demo workflow before delivery.
+- [x] Add base-preserving and manual-review candidate paths that receive the same validation and ranking treatment as other strategies.
+- [x] Add explicit candidate revalidation and persisted patch retrieval procedures, then wire them into the resolution workspace.
+- [x] Replace display-only demo context with editable repository path, source branch, target branch, and validation-profile controls.
+- [x] Add focused AST, conflict-classification, candidate-generation, and ranking unit tests alongside the end-to-end workflow test.
+- [x] Re-run desktop, responsive, and end-to-end interaction verification after the final controls are connected.
