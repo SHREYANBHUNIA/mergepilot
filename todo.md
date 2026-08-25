@@ -25,3 +25,4 @@
 - [x] Add a regression test for the exact fallback path and re-verify the browser mutation on `/?from_webdev=1`.
 - [x] Return and test an explicit analysis execution mode so the demo bypass is observable in the Python-core result.
 - [x] Export the verified MergePilot project to the user's GitHub account in a private deployment-ready repository.
+- [ ] Rewrite MergePilot Git commit authorship to CSE - 148 - SHREYAN BHUNIA <shreyan.bhunia.k@gmail.com> and update GitHub history.
