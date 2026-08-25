@@ -16,3 +16,7 @@ The final MVP was verified on **August 25, 2026**. The analysis pipeline was exe
 | Interactive audit ledger | Rendered-browser flow | Opened the Resolution Ledger and confirmed that completed analyses were present with branch path, conflict count, validation status, and timestamp. |
 
 The dashboard remains intentionally conservative around test execution. Repository paths must remain inside the configured approved workspace root, and validation commands are selected from a small allow-list rather than accepted as arbitrary browser input.
+
+## Demo repository lifecycle regression
+
+The demo repository resolver now trims browser input and accepts a normalized demo alias, including the trailing-slash form `demo://mergepilot/`. It creates and verifies the disposable Git working tree before repository inspection begins. The regression suite passed with **8 Python tests**, two Vitest files, and TypeScript checking. A rendered-browser run using the normalized trailing-slash identifier completed with one detected semantic conflict and five candidate strategies, without the previous “initialized Git working tree” error.

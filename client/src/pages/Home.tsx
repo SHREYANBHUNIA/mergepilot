@@ -104,9 +104,9 @@ export default function Home() {
   const startDemo = () => {
     setExpandedPatch(false);
     analysisMutation.mutate({
-      repositoryPath,
-      sourceBranch,
-      targetBranch,
+      repositoryPath: repositoryPath.trim() || "demo://mergepilot",
+      sourceBranch: sourceBranch.trim(),
+      targetBranch: targetBranch.trim(),
       validationProfile,
     });
   };

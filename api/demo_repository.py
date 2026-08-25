@@ -62,4 +62,9 @@ def create_demo_repository() -> tuple[str, callable]:
     repo.index.commit("source: include sales tax")
     repo.git.checkout("master")
 
-    return str(repository_path), lambda: shutil.rmtree(repository_path, ignore_errors=True)
+    working_tree = Path(repo.working_tree_dir or "").resolve()
+    if working_tree != repository_path.resolve() or not (working_tree / ".git").exists():
+        shutil.rmtree(repository_path, ignore_errors=True)
+        raise RuntimeError("MergePilot could not initialize its disposable demo Git repository.")
+
+    return str(working_tree), lambda: shutil.rmtree(working_tree, ignore_errors=True)

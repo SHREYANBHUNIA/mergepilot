@@ -18,3 +18,5 @@
 - [x] Replace display-only demo context with editable repository path, source branch, target branch, and validation-profile controls.
 - [x] Add focused AST, conflict-classification, candidate-generation, and ranking unit tests alongside the end-to-end workflow test.
 - [x] Re-run desktop, responsive, and end-to-end interaction verification after the final controls are connected.
+- [x] Fix the live demo-analysis mutation so `demo://mergepilot` is resolved to a disposable Git working tree before repository inspection.
+- [x] Add regression coverage for the demo repository lifecycle and verify the browser-triggered analysis completes without a Git working-tree error.

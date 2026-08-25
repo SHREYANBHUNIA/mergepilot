@@ -6,7 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "api"))
 
-from orchestrator import analyze_repository
+from orchestrator import _is_demo_repository_path, analyze_repository
 
 
 class MergePilotCoreWorkflowTests(unittest.TestCase):
@@ -35,6 +35,11 @@ class MergePilotCoreWorkflowTests(unittest.TestCase):
             analysis = analyze_repository("demo://mergepilot", "feature/tax-aware-total", "master", "demo-node")
         strategies = [candidate["strategy"] for candidate in analysis["conflicts"][0]["candidates"]]
         self.assertNotIn("llm-assisted", strategies)
+
+    def test_demo_aliases_are_normalized_before_the_git_inspector_runs(self):
+        self.assertTrue(_is_demo_repository_path(" demo://mergepilot/ "))
+        self.assertTrue(_is_demo_repository_path("mergepilot-demo"))
+        self.assertFalse(_is_demo_repository_path("/home/ubuntu/not-a-repository"))
 
 
 if __name__ == "__main__":

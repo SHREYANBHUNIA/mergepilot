@@ -26,11 +26,19 @@ scorer = importlib.import_module("scorer")
 from demo_repository import create_demo_repository
 
 
+DEMO_REPOSITORY_ALIASES = {"demo://mergepilot", "demo:/mergepilot", "mergepilot-demo"}
+
+
+def _is_demo_repository_path(repository_path: str) -> bool:
+    return repository_path.strip().rstrip("/") in DEMO_REPOSITORY_ALIASES
+
+
 def _restrict_repository_path(repository_path: str) -> str:
-    if repository_path == "demo://mergepilot":
-        return repository_path
+    normalized_path = repository_path.strip()
+    if _is_demo_repository_path(normalized_path):
+        return "demo://mergepilot"
     allowed_root = Path(__import__("os").environ.get("MERGEPILOT_REPOSITORIES_ROOT", ROOT)).resolve()
-    candidate = Path(repository_path).resolve()
+    candidate = Path(normalized_path).expanduser().resolve()
     if allowed_root not in [candidate, *candidate.parents]:
         raise ValueError("Repository path is outside the configured approved workspace root.")
     return str(candidate)
@@ -40,7 +48,7 @@ def analyze_repository(repository_path: str, source_branch: str, target_branch: 
     cleanup = None
     try:
         restricted_path = _restrict_repository_path(repository_path)
-        if restricted_path == "demo://mergepilot":
+        if _is_demo_repository_path(restricted_path):
             restricted_path, cleanup = create_demo_repository()
             source_branch = "feature/tax-aware-total"
             target_branch = "master"
