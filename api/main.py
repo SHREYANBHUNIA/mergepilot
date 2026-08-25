@@ -13,6 +13,7 @@ class AnalysisRequest(BaseModel):
     source_branch: str = Field(default="feature/tax-aware-total")
     target_branch: str = Field(default="master")
     validation_profile: str = Field(default="demo-node")
+    demo_mode: bool = Field(default=False)
 
 
 @app.get("/health")
@@ -28,6 +29,7 @@ def create_analysis(request: AnalysisRequest) -> dict:
             request.source_branch,
             request.target_branch,
             request.validation_profile,
+            request.demo_mode,
         )
     except (ValueError, RuntimeError) as error:
         raise HTTPException(status_code=400, detail=str(error)) from error

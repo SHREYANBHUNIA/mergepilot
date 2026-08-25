@@ -34,6 +34,7 @@ export type MergePilotAnalysis = {
   id: string;
   status: "completed";
   repositoryPath: string;
+  executionMode: "demo-disposable" | "approved-workspace";
   sourceBranch: string;
   targetBranch: string;
   mergeBase: string;
@@ -68,6 +69,7 @@ export async function runMergePilotAnalysis(input: {
   sourceBranch: string;
   targetBranch: string;
   validationProfile: string;
+  demoMode?: boolean;
 }): Promise<MergePilotAnalysis> {
   const corePath = path.join(process.cwd(), "api", "cli.py");
   await access(corePath);

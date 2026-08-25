@@ -108,6 +108,7 @@ export default function Home() {
       sourceBranch: sourceBranch.trim(),
       targetBranch: targetBranch.trim(),
       validationProfile,
+      demoMode: true,
     });
   };
 

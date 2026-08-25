@@ -44,11 +44,20 @@ def _restrict_repository_path(repository_path: str) -> str:
     return str(candidate)
 
 
-def analyze_repository(repository_path: str, source_branch: str, target_branch: str, validation_profile: str = "demo-node") -> dict:
+def analyze_repository(
+    repository_path: str,
+    source_branch: str,
+    target_branch: str,
+    validation_profile: str = "demo-node",
+    demo_mode: bool = False,
+) -> dict:
     cleanup = None
     try:
-        restricted_path = _restrict_repository_path(repository_path)
-        if _is_demo_repository_path(restricted_path):
+        # The dashboard's Demo action is explicit rather than inferred from a text field.
+        # This prevents a stale/edited browser input from ever reaching Git inspection in demo mode.
+        restricted_path = "demo://mergepilot" if demo_mode else _restrict_repository_path(repository_path)
+        is_demo_execution = demo_mode or _is_demo_repository_path(restricted_path)
+        if is_demo_execution:
             restricted_path, cleanup = create_demo_repository()
             source_branch = "feature/tax-aware-total"
             target_branch = "master"
@@ -106,7 +115,8 @@ def analyze_repository(repository_path: str, source_branch: str, target_branch: 
         return {
             "id": str(uuid4()),
             "status": "completed",
-            "repositoryPath": repository_path,
+            "repositoryPath": "demo://mergepilot" if is_demo_execution else repository_path,
+            "executionMode": "demo-disposable" if is_demo_execution else "approved-workspace",
             "sourceBranch": source_branch,
             "targetBranch": target_branch,
             "mergeBase": repository["mergeBase"],

@@ -20,3 +20,7 @@ The dashboard remains intentionally conservative around test execution. Reposito
 ## Demo repository lifecycle regression
 
 The demo repository resolver now trims browser input and accepts a normalized demo alias, including the trailing-slash form `demo://mergepilot/`. It creates and verifies the disposable Git working tree before repository inspection begins. The regression suite passed with **8 Python tests**, two Vitest files, and TypeScript checking. A rendered-browser run using the normalized trailing-slash identifier completed with one detected semantic conflict and five candidate strategies, without the previous “initialized Git working tree” error.
+
+The Demo action now also sends an explicit `demoMode` flag across the React client, typed API bridge, Python CLI, and orchestrator. A final rendered-browser run at `/?from_webdev=1` deliberately set the visible repository input to `/definitely/not/a/repository`; the Demo action still created a verified disposable Git repository and completed the analysis with one semantic conflict and five candidates. This confirms a browser path can no longer reach Git inspection during demo mode.
+
+The live typed analysis response now exposes `repositoryPath: "demo://mergepilot"` and `executionMode: "demo-disposable"` when `demoMode` is active, even if the request visibly carries an invalid path. The final regression run passed **9 Python tests**, TypeScript checking, and the application test suite.

@@ -13,6 +13,7 @@ def main() -> None:
         payload.get("sourceBranch", "feature/tax-aware-total"),
         payload.get("targetBranch", "master"),
         payload.get("validationProfile", "demo-node"),
+        payload.get("demoMode", False),
     )
     print(json.dumps(result))
 

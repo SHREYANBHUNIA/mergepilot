@@ -20,3 +20,7 @@
 - [x] Re-run desktop, responsive, and end-to-end interaction verification after the final controls are connected.
 - [x] Fix the live demo-analysis mutation so `demo://mergepilot` is resolved to a disposable Git working tree before repository inspection.
 - [x] Add regression coverage for the demo repository lifecycle and verify the browser-triggered analysis completes without a Git working-tree error.
+- [x] Trace the recurring `/?from_webdev=1` analysis mutation to capture the actual repository value reaching the Python core.
+- [x] Make demo analysis fail-safe by resolving an unverified browser repository value to a verified disposable repository before any Git inspection.
+- [x] Add a regression test for the exact fallback path and re-verify the browser mutation on `/?from_webdev=1`.
+- [x] Return and test an explicit analysis execution mode so the demo bypass is observable in the Python-core result.

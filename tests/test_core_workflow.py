@@ -41,6 +41,19 @@ class MergePilotCoreWorkflowTests(unittest.TestCase):
         self.assertTrue(_is_demo_repository_path("mergepilot-demo"))
         self.assertFalse(_is_demo_repository_path("/home/ubuntu/not-a-repository"))
 
+    def test_explicit_demo_mode_never_passes_a_browser_path_to_git_inspection(self):
+        analysis = analyze_repository(
+            "/home/ubuntu/mergepilot/not-a-repository",
+            "not-a-branch",
+            "not-a-branch",
+            "none",
+            demo_mode=True,
+        )
+        self.assertEqual(analysis["status"], "completed")
+        self.assertEqual(analysis["executionMode"], "demo-disposable")
+        self.assertEqual(analysis["repositoryPath"], "demo://mergepilot")
+        self.assertEqual(analysis["summary"]["conflictCount"], 1)
+
 
 if __name__ == "__main__":
     unittest.main()

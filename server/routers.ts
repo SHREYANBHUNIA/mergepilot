@@ -27,6 +27,7 @@ export const appRouter = router({
         sourceBranch: z.string().min(1),
         targetBranch: z.string().min(1),
         validationProfile: z.enum(["demo-node", "python-unit", "none"]).default("demo-node"),
+        demoMode: z.boolean().default(false),
       }))
       .mutation(async ({ input, ctx }) => {
         const analysis = await runMergePilotAnalysis(input);
